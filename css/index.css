@@ -230,5 +230,9 @@ nav {
     .card {
     width:100%;
     }
+
+    .filter-options{
+      height: 150px;
+    }
   }
   

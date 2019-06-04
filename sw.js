@@ -1,3 +1,4 @@
+try{
 var cacheName = 'sw_v1';
 var cacheFiles = [
   '/',
@@ -14,7 +15,8 @@ var cacheFiles = [
   'img/10.jpg',
   'js/dbhelper.js',
   'js/main.js',
-  'data/restaurants.json'
+  'js/restaurant_info.js',
+  'js/registerService.js'
 ]
 
 self.addEventListener('install', event => {
@@ -33,7 +35,7 @@ self.addEventListener('fetch', function (e) {
       //console.log('[Service Worker] Fetching resource: ' + e.request.url);
       return r || fetch(e.request).then(function (response) {
         return caches.open(cacheName).then(function (cache) {
-          //console.log('[Service Worker] Caching new resource: ' + e.request.url);
+          console.log('[Service Worker] Caching new resource: ' + e.request.url);
           cache.put(e.request, response.clone());
           return response;
         }).catch((e)=>console.log(e));
@@ -46,3 +48,7 @@ self.addEventListener('fetch', function (e) {
 self.addEventListener('activate', event => {
   console.log('Activating the service worker');
 });
+}
+catch(e){
+  console.log(e.stack);
+}
